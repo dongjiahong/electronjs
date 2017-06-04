@@ -20,7 +20,7 @@ function createWindow(){
 app.on("ready", createWindow);
 
 app.on("window-all-closed",function(){
-    if(process.platform!="darwin"){
+    if(process.platform!="darwin"){ // 判断是否是windowns系统
         app.quit();
     }
 });
