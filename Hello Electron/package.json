@@ -1,0 +1,5 @@
+{
+    "name": "My First Electron App",
+    "version": "0.1",
+    "main": "app.js"
+}
