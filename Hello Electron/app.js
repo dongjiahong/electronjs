@@ -6,8 +6,8 @@ let mainWindow;
 
 function createWindow(){
     mainWindow=new BrowserWindow({
-        width: 300,
-        height: 400
+        width: 950,
+        height: 500
     });
 
     mainWindow.loadURL('file://'+__dirname+'/index.html');
@@ -20,9 +20,7 @@ function createWindow(){
 app.on("ready", createWindow);
 
 app.on("window-all-closed",function(){
-    if(process.platform!="darwin"){ // 判断是否是windowns系统
-        app.quit();
-    }
+    app.quit();
 });
 
 app.on("activate",function(){
