@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Editable WYSIWYG</title>
+
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="font-awesome.css" rel="stylesheet">
+    <style>
+        #editor {
+            resize: vertical;
+            overflow: auto;
+            border: 1px solid silver;
+            border-radius: 5px;
+            min-height: 100px;
+            box-shadow: inset 0 0 10px silver;
+            padding: 1em;
+        }
+    </style>
+
+    <script tpye="text/javascript">
+        function insRow() {
+            var len = document.getElementById('myTable').rows.length;
+            var row = document.getElementById('myTable').insertRow(len);
+            var x = row.insertCell(0);
+            var y = row.insertCell(1);
+            x.innerHTML = "New Cell1";
+            y.innerHTML = "New Cell2";
+        }
+    </script>
+</head>
+
+<body>
+    <table id="myTable" border="1">
+        <tr>
+            <td>Row1 cell</td>
+            <td>Row1 cell</td>
+        </tr>
+        <tr>
+            <td>Row2 cell</td>
+            <td>Row2 cell</td>
+        </tr>
+    </table>
+
+    <br />
+    <input type="button" onclick="insRow()" value="插入">
+
+    <div class="content">
+        <div class="container-fluid">
+            <div id='pad-wrapper'>
+                <div id="editparent">
+                    <div id='editControls' class='span12' style='text-align:center; padding:5px;'>
+                        <div class='btn-group'>
+                            <a class='btn' data-role='undo' href='#'><i class='icon-undo'></i></a>
+                            <a class='btn' data-role='redo' href='#'><i class='icon-repeat'></i></a>
+                        </div>
+                        <div class='btn-group'>
+                            <a class='btn' data-role='indent' href='#'><i class='icon-indent-right'></i></a>
+                            <a class='btn' data-role='outdent' href='#'><i class='icon-indent-left'></i></a>
+                        </div>
+                        <div class='btn-group'>
+                            <a class='btn' data-role='insertUnorderedList' href='#'><i class='icon-list-ul'></i></a>
+                            <a class='btn' data-role='insertOrderedList' href='#'><i class='icon-list-ol'></i></a>
+                        </div>
+                        <div class='btn-group'>
+                            <a class='btn' data-role='subscript' href='#'><i class='icon-subscript'></i></a>
+                            <a class='btn' data-role='superscript' href='#'><i class='icon-superscript'></i></a>
+                        </div>
+                    </div>
+                    <div id='editor' class='span12' style='' contenteditable>
+                        <h1>This is a title!</h1>
+                        <p>This is just some example text to start us off</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#editControls a').click(function (e) {
+                switch ($(this).data('role')) {
+                    case 'h1':
+                    case 'h2':
+                    case 'p':
+                        document.execCommand('formatBlock', false, '<' + $(this).data('role') + '>');
+                        break;
+                    default:
+                        document.execCommand($(this).data('role'), false, null);
+                        break;
+                }
+
+            })
+        });
+    </script>
+</body>
+
+</html>
